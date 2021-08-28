@@ -2,10 +2,10 @@
 
 ```jsx
 function twice(value) {
-  return value \* 2;
+  return value * 2;
 }
 
-const triple = (value) => value \* 3;
+const triple = (value) => value * 3;
 // 이렇게 따로 { }를 열어 주지 않으면 연산한 값을 그대로 반환한다는 의미
 ```
 
@@ -40,3 +40,30 @@ MyComponent.propTypes = {
 - 리액트에서 state는 컴포넌트 내부에서 바뀔 수 있는 값을 의미
 - props는 컴포넌트가 사용되는 과정에서 부모 컴포넌트가 설정하는 값이며, 컴포넌트 자신은 해당 props를 읽기 전용으로만 사용할 수 있다.
 - props를 바꾸려면 부모 컴포넌트에서 바꾸어 주어야 한다.
+
+<br>
+
+### 배열 비구조화 할당
+
+```jsx
+const array = [1, 2];
+const one = array[0];
+const two = array[1];
+// array 안에 있는 값을 one과 two에 담아 주는 코드
+
+// 배열 비구조화 할당
+const array = [1, 2];
+const [one, two] = array;
+```
+
+```jsx
+// 객체 안에서 key를 [ ]로 감싸면 그 안에 넣은 레퍼런스가 가리키는 실제 값이 key 값으로 사용된다.
+const name = 'Bob';
+const object = {
+  [name]: 'value',
+};
+// 결과
+{
+  'Bob': 'value'
+}
+```
