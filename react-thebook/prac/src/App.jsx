@@ -1,8 +1,8 @@
 import React from 'react';
-import EventPractice from './components/EventPractice';
+import IterationSample from './components/IterationSample';
 
 function App() {
-  return <EventPractice />;
+  return <IterationSample />;
 }
 
 export default App;
