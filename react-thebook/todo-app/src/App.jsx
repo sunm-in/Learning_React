@@ -1,3 +1,4 @@
+/* eslint-disable */
 // library
 import React, { useState, useRef, useCallback } from 'react';
 
@@ -6,42 +7,35 @@ import TodoTemplate from './components/TodoTemplate';
 import TodoInsert from './components/TodoInsert';
 import TodoList from './components/TodoList';
 
+function createBulkTodos() {
+  const array = [];
+  for (let i = 1; i <= 2500; i++) {
+    array.push({
+      id: i,
+      text: `할일${i}`,
+      checked: false,
+    });
+  }
+  return array;
+}
+
 const App = () => {
   // useState를 사용해서 todos라는 상태를 정의하고, todos를 TodoList의 props로 전달하기
-  const [todos, setTodos] = useState([
-    {
-      id: 1,
-      text: 'React',
-      checked: true,
-    },
-    {
-      id: 2,
-      text: 'React-2',
-      checked: true,
-    },
-    {
-      id: 3,
-      text: 'React-3',
-      checked: false,
-    },
-  ]);
+  const [todos, setTodos] = useState(createBulkTodos);
 
   // 고윳값으로 사용될 id -> ref를 사용해서 변수에 담기
-  const nextId = useRef(4);
+  const nextId = useRef(2501);
 
-  const onInsert = useCallback(
-    (text) => {
-      const todo = { id: nextId.current, text, checked: false };
-      setTodos(todos.concat(todo));
-      nextId.current += 1; // nextId 1씩 더하기
-    },
-    [todos],
-  );
+  const onInsert = useCallback((text) => {
+    const todo = { id: nextId.current, text, checked: false };
+    setTodos((todos) => todos.concat(todo));
+    nextId.current += 1; // nextId 1씩 더하기
+  }, []);
 
   // 삭제
   const onRemove = useCallback(
     (id) => {
-      setTodos(todos.filter((todo) => todo.id !== id));
+      setTodos((todos) => todos.filter((todo) => todo.id !== id));
     },
     [todos],
   );
@@ -51,7 +45,7 @@ const App = () => {
   // map 함수는 배열을 전체적으로 새로운 형태로 변환하여 새로운 배열을 생성해야 할 때 사용한다
   const onToggle = useCallback(
     (id) => {
-      setTodos(
+      setTodos((todos) =>
         todos.map((todo) =>
           todo.id === id ? { ...todo, checked: !todo.checked } : todo,
         ),
