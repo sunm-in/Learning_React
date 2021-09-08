@@ -1,10 +1,23 @@
 /* eslint-disable */
-import React from 'react';
-import { Navbar, Container, Nav } from 'react-bootstrap';
+// library
+import React, { useState } from 'react';
 import styled from 'styled-components';
+
+// component
+import Card from './components/Card';
+
+// bootstrap
+import { Navbar, Container, Nav } from 'react-bootstrap';
+
+// style
 import './App.css';
 
+// data
+import Data from './common/Data';
+
 function App() {
+  const [place, setPlace] = useState(Data);
+
   return (
     <div className="App">
       <Navbar bg="dark" variant="dark">
@@ -17,35 +30,12 @@ function App() {
           </Nav>
         </Container>
       </Navbar>
-
       <Jumbotron />
-
       <div className="container">
         <div className="row">
-          <div className="col-md-4">
-            <img
-              src="https://t4.daumcdn.net/thumb/R720x0/?fname=http://t1.daumcdn.net/brunch/service/user/2RB/image/p4r9UUNR9IFdXvLWEqr-n1m3R0g.png"
-              width="100%"
-            />
-            <h4>장소명</h4>
-            <p>장소 설명 & 위치</p>
-          </div>
-          <div className="col-md-4">
-            <img
-              src="https://t4.daumcdn.net/thumb/R720x0/?fname=http://t1.daumcdn.net/brunch/service/user/2RB/image/p4r9UUNR9IFdXvLWEqr-n1m3R0g.png"
-              width="100%"
-            />
-            <h4>장소명</h4>
-            <p>장소 설명 & 위치</p>
-          </div>
-          <div className="col-md-4">
-            <img
-              src="https://t4.daumcdn.net/thumb/R720x0/?fname=http://t1.daumcdn.net/brunch/service/user/2RB/image/p4r9UUNR9IFdXvLWEqr-n1m3R0g.png"
-              width="100%"
-            />
-            <h4>장소명</h4>
-            <p>장소 설명 & 위치</p>
-          </div>
+          {place.map((place, i) => {
+            return <Card key={i} place={place} />;
+          })}
         </div>
       </div>
     </div>
