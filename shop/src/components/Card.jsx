@@ -1,7 +1,7 @@
 // library
 import React from 'react';
 
-const PlacePost = (props) => {
+const Card = (props) => {
   return (
     <div className="col-md-4">
       <img alt="" src={props.place.image} width="100%" />
@@ -13,4 +13,4 @@ const PlacePost = (props) => {
   );
 };
 
-export default PlacePost;
+export default Card;
