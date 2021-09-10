@@ -1,15 +1,58 @@
 /* eslint-disable */
 // library
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { useHistory, useParams } from 'react-router-dom';
+import styled from 'styled-components';
+
+// style
+import './CardDetail.scss';
+
+const Box = styled.div`
+  padding: 20px;
+`;
+
+const Title = styled.h4`
+  font-size: 25px;
+  color: ${(props) => props.color};
+`;
 
 const CardDetail = (props) => {
   const history = useHistory();
   const { id } = useParams();
   const _place = props.place.find((x) => x.id === parseInt(id));
 
+  const [alert, setAlert] = useState(true);
+  const [text, setText] = useState('');
+
+  useEffect(() => {
+    let timer = setTimeout(() => {
+      setAlert(false);
+    }, 2000);
+    return () => {
+      clearTimeout(timer);
+    };
+  }, []);
+
+  const onChange = (e) => {
+    setText(e.target.value);
+  };
+
   return (
     <div className="container">
+      <Box>
+        <Title className="red" color="blue">
+          Detail
+        </Title>
+      </Box>
+
+      <input onChange={onChange} />
+      {text}
+      {alert === true ? (
+        <div className="my-alert2">
+          <p>현재 출입이 불가합니다.</p>
+        </div>
+      ) : null}
+
       <div className="row">
         <div className="col-md-6">
           <img src={_place.image} width="100%" />

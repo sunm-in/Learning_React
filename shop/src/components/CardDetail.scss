@@ -1,0 +1,44 @@
+$detailColor: #ff0000;
+
+.red {
+  color: $detailColor;
+}
+
+@mixin detailStyle {
+  background: #eeeeee;
+  padding: 18px;
+  border-radius: 5px;
+  max-width: 500px;
+  width: 100%;
+  margin: 0 auto 3% auto;
+
+  p {
+    margin-bottom: 0;
+  }
+}
+
+.my-alert {
+  @include detailStyle();
+}
+
+.my-alert2 {
+  @extend .my-alert;
+  background: #ffe591;
+}
+
+// div.container h4 {
+//   color: blue;
+// }
+
+// div.container p {
+//   color: green;
+// }
+
+// div.container {
+//   h4 {
+//     color: blue;
+//   }
+//   p {
+//     color: purple;
+//   }
+// }
