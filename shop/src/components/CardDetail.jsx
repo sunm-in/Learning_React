@@ -4,6 +4,9 @@ import React, { useEffect, useState } from 'react';
 import { useHistory, useParams } from 'react-router-dom';
 import styled from 'styled-components';
 
+// component
+import { Info } from './index';
+
 // style
 import './CardDetail.scss';
 
@@ -23,6 +26,8 @@ const CardDetail = (props) => {
 
   const [alert, setAlert] = useState(true);
   const [text, setText] = useState('');
+
+  const [stock, setStock] = useState([10, 11, 12]);
 
   useEffect(() => {
     let timer = setTimeout(() => {
@@ -61,7 +66,16 @@ const CardDetail = (props) => {
           <h4 className="pt-5">{_place.title}</h4>
           <p>{_place.content}</p>
           <p>{_place.price}</p>
-          <button style={{ margin: '0 2%' }} className="btn btn-danger">
+
+          <Info stock={stock}></Info>
+
+          <button
+            onClick={() => {
+              setStock([9, 10, 11]);
+            }}
+            style={{ margin: '0 2%' }}
+            className="btn btn-danger"
+          >
             주문하기
           </button>
           <button

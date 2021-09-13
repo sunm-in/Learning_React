@@ -13,8 +13,6 @@ import axios from 'axios';
 
 const Main = () => {
   const [place, setPlace] = useState(Data);
-  console.log(place);
-
   const [loading, setLoading] = useState(false);
 
   return (
