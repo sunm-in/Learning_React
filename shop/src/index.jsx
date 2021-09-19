@@ -6,10 +6,51 @@ import reportWebVitals from './reportWebVitals';
 
 import { BrowserRouter } from 'react-router-dom';
 
+import { Provider } from 'react-redux';
+import { combineReducers, createStore } from 'redux';
+
+let alertInitialState = true;
+
+function reducer2(state = alertInitialState, action) {
+  if (action.type === 'alertClose') {
+    state = false;
+    return state;
+  } else {
+    return state;
+  }
+}
+
+let initialState = [
+  { id: 0, name: '멋진 신발', quan: 2 },
+  { id: 1, name: '제품22', quan: 4 },
+];
+
+function reducer(state = initialState, action) {
+  if (action.type === 'ADD_PRODUCT') {
+    let copy = [...state];
+    copy.push(action.payload);
+    return copy;
+  } else if (action.type === 'INCREASE_QUAN') {
+    let changeState = [...state];
+    changeState[0].quan++;
+    return changeState;
+  } else if (action.type === 'DECREASE_QUAN') {
+    let changeState = [...state];
+    changeState[0].quan--;
+    return changeState;
+  } else {
+    return state;
+  }
+}
+
+let store = createStore(combineReducers({ reducer, reducer2 }));
+
 ReactDOM.render(
   <React.StrictMode>
     <BrowserRouter>
-      <App />
+      <Provider store={store}>
+        <App />
+      </Provider>
     </BrowserRouter>
   </React.StrictMode>,
   document.getElementById('root'),

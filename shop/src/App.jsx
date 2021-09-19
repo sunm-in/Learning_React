@@ -12,7 +12,7 @@ import './App.css';
 import { Header } from './components';
 
 // page
-import { Main, Detail } from './pages';
+import { Main, Detail, Cart } from './pages';
 
 function App() {
   return (
@@ -21,6 +21,7 @@ function App() {
       <Switch>
         <Route path="/" component={Main} exact />
         <Route path="/detail/:id" component={Detail} exact />
+        <Route path="/cart" component={Cart} exact />
       </Switch>
     </div>
   );
