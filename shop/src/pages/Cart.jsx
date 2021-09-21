@@ -5,9 +5,13 @@ import React from 'react';
 import { Table } from 'react-bootstrap';
 
 // redux
-import { connect } from 'react-redux';
+import { connect, useSelector, useDispatch } from 'react-redux';
 
 const Cart = (props) => {
+  const dispatch = useDispatch();
+  const state = useSelector((state) => state);
+  console.log(state.reducer);
+
   return (
     <div>
       <Table responsive="sm">
@@ -20,7 +24,7 @@ const Cart = (props) => {
           </tr>
         </thead>
         <tbody>
-          {props.state.map((p, i) => {
+          {state.reducer.map((p, i) => {
             return (
               <tr key={i}>
                 <td>{p.id}</td>
@@ -30,14 +34,14 @@ const Cart = (props) => {
                   <button
                     style={{ marginRight: '3%' }}
                     onClick={() => {
-                      props.dispatch({ type: 'INCREASE_QUAN' });
+                      dispatch({ type: 'INCREASE_QUAN' });
                     }}
                   >
                     +
                   </button>
                   <button
                     onClick={() => {
-                      props.dispatch({ type: 'DECREASE_QUAN' });
+                      dispatch({ type: 'DECREASE_QUAN' });
                     }}
                   >
                     -
@@ -66,14 +70,14 @@ const Cart = (props) => {
 };
 
 // state를 props화 해주는 과정
-function product(state) {
-  console.log(state);
-  return {
-    state: state.reducer,
-    alertState: state.reducer2,
-  };
-}
+// function product(state) {
+//   console.log(state);
+//   return {
+//     state: state.reducer,
+//     alertState: state.reducer2,
+//   };
+// }
 
-export default connect(product)(Cart);
+// export default connect(product)(Cart);
 
-// export default Cart;
+export default Cart;
