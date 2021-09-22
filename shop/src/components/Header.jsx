@@ -18,13 +18,16 @@ const Header = () => {
             <Nav.Link as={Link} to="/">
               Home
             </Nav.Link>
-            <Nav.Link as={Link} to="/detail">
+            <Nav.Link as={Link} to={'/detail'}>
               Detail
             </Nav.Link>
-            <Nav.Link href="#pricing">Pricing</Nav.Link>
+            <Nav.Link as={Link} to={'/cart'}>
+              Cart
+            </Nav.Link>
           </Nav>
         </Container>
       </Navbar>
+
       <Jumbotron />
     </>
   );
@@ -33,6 +36,7 @@ const Header = () => {
 const Jumbotron = styled.div`
   width: 100%;
   height: 350px;
+  margin-bottom: 3%;
   background-image: url('https://d2u3dcdbebyaiu.cloudfront.net/uploads/atch_img/621/2f34602ed32553ee5809a70a1321aefb.jpeg');
   background-size: cover;
   background-position: center;

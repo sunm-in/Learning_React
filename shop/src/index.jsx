@@ -27,16 +27,26 @@ let initialState = [
 
 function reducer(state = initialState, action) {
   if (action.type === 'ADD_PRODUCT') {
-    let copy = [...state];
-    copy.push(action.payload);
-    return copy;
+    let found = state.findIndex((data) => {
+      return data.id === action.payload.id;
+    });
+
+    if (found >= 0) {
+      let copy = [...state];
+      copy[found].quan++;
+      return copy;
+    } else {
+      let copy = [...state];
+      copy.push(action.payload);
+      return copy;
+    }
   } else if (action.type === 'INCREASE_QUAN') {
     let changeState = [...state];
-    changeState[0].quan++;
+    changeState[action.payload].quan++;
     return changeState;
   } else if (action.type === 'DECREASE_QUAN') {
     let changeState = [...state];
-    changeState[0].quan--;
+    changeState[action.payload].quan--;
     return changeState;
   } else {
     return state;

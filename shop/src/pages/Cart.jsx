@@ -34,14 +34,14 @@ const Cart = (props) => {
                   <button
                     style={{ marginRight: '3%' }}
                     onClick={() => {
-                      dispatch({ type: 'INCREASE_QUAN' });
+                      dispatch({ type: 'INCREASE_QUAN', payload: p.id });
                     }}
                   >
                     +
                   </button>
                   <button
                     onClick={() => {
-                      dispatch({ type: 'DECREASE_QUAN' });
+                      dispatch({ type: 'DECREASE_QUAN', payload: p.id });
                     }}
                   >
                     -

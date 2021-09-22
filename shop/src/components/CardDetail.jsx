@@ -83,7 +83,7 @@ const CardDetail = (props) => {
               setStock([9, 10, 11]);
               props.dispatch({
                 type: 'ADD_PRODUCT',
-                payload: { id: 2, name: '새로운 상품', quan: 1 },
+                payload: { id: _place.id, name: _place.title, quan: 1 },
               });
               history.push('/cart');
             }}
