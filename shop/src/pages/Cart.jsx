@@ -1,5 +1,5 @@
 // library
-import React from 'react';
+import React, { useEffect, memo } from 'react';
 
 // bootstrap
 import { Table } from 'react-bootstrap';
@@ -10,7 +10,11 @@ import { connect, useSelector, useDispatch } from 'react-redux';
 const Cart = (props) => {
   const dispatch = useDispatch();
   const state = useSelector((state) => state);
-  console.log(state.reducer);
+  console.log(state);
+
+  const alertClose = () => {
+    dispatch({ type: 'alertClose' });
+  };
 
   return (
     <div>
@@ -53,21 +57,41 @@ const Cart = (props) => {
         </tbody>
       </Table>
 
-      {props.alertState === true ? (
+      {state.reducer2 === true ? (
         <div className="my-alert2">
           <p>지금 구매하시면 신규할인 20%</p>
-          <button
-            onClick={() => {
-              props.dispatch({ type: 'alertClose' });
-            }}
-          >
-            닫기
+          <button className="alert-button" onClick={alertClose}>
+            X
           </button>
         </div>
       ) : null}
+
+      <Parent name="sm" age="10"></Parent>
     </div>
   );
 };
+
+function Parent(props) {
+  return (
+    <div>
+      <Child1 name={props.name}></Child1>
+      <Child2 age={props.age}></Child2>
+    </div>
+  );
+}
+
+function Child1() {
+  useEffect(() => {
+    console.log('렌더링완료 1');
+  });
+  return <div>1111</div>;
+}
+let Child2 = memo(function () {
+  useEffect(() => {
+    console.log('렌더링완료 2');
+  });
+  return <div>2222</div>;
+});
 
 // state를 props화 해주는 과정
 // function product(state) {
