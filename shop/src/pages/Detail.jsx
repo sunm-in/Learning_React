@@ -1,9 +1,9 @@
 /*  eslint-disable */
 // library
-import React, { useState } from 'react';
+import React, { useState, lazy, Suspense } from 'react';
 
 // component
-import { CardDetail } from '../components';
+let CardDetail = lazy(() => import('../components/CardDetail.jsx'));
 
 // data
 import Data from '../common/Data';
@@ -24,7 +24,9 @@ const Detail = () => {
 
   return (
     <>
-      <CardDetail place={place} />
+      <Suspense fallback={<div>로딩중!!!!!</div>}>
+        <CardDetail place={place} />
+      </Suspense>
     </>
   );
 };
