@@ -35,6 +35,15 @@ $detailColor: #ff0000;
 .my-alert2 {
   @extend .my-alert;
   background: #ffe591;
+  display: flex;
+  justify-content: center;
+}
+
+.alert-button {
+  background: none;
+  border: none;
+  margin-left: 25%;
+  margin-right: -30%;
 }
 
 // div.container h4 {
