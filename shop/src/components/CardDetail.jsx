@@ -36,6 +36,21 @@ const CardDetail = (props) => {
   const [tab, setTab] = useState(0); // 지금 누른 번호
   const [aniSwitch, setAniSwitch] = useState(false);
 
+  useEffect(() => {
+    let arr = localStorage.getItem('watched');
+    if (arr === null) {
+      arr = [];
+    } else {
+      arr = JSON.parse(arr);
+    }
+
+    arr.push(id);
+    arr = new Set(arr);
+    arr = [...arr];
+
+    localStorage.setItem('watched', JSON.stringify(arr));
+  }, []);
+
   // const [alert, setAlert] = useState(true);
   // const [text, setText] = useState('');
 
@@ -132,7 +147,7 @@ const CardDetail = (props) => {
         </Nav.Item>
       </Nav>
 
-      <CSSTransition in={aniSwitch} classNames="wow" timeout={500}>
+      <CSSTransition in={false} classNames="wow" timeout={500}>
         <TabContent tab={tab} setAniSwitch={setAniSwitch} />
       </CSSTransition>
     </div>

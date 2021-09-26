@@ -5,7 +5,7 @@ import React, { useEffect, memo } from 'react';
 import { Table } from 'react-bootstrap';
 
 // redux
-import { connect, useSelector, useDispatch } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 
 const Cart = (props) => {
   const dispatch = useDispatch();
