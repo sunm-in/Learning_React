@@ -1,2 +1,3 @@
 # Learning_React
-Learning React
+
+✍🏼 리액트를 공부한 내용이나 만들었던 작은 프로젝트들을 기록합니다.
