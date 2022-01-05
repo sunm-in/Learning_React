@@ -1,6 +1,11 @@
+// library
 import React from 'react';
 import PropTypes from 'prop-types';
+
+// head
 import Head from 'next/head';
+
+// antd/css
 import 'antd/dist/antd.css';
 
 const App = ({ Component }) => {

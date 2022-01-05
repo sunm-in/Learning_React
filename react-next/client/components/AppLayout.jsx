@@ -1,5 +1,6 @@
 // library
 import React, { useState } from 'react';
+import styled from 'styled-components';
 import PropTypes from 'prop-types';
 
 // link
@@ -11,9 +12,6 @@ import LoginForm from './LoginForm';
 
 // antd
 import { Menu, Input, Row, Col } from 'antd';
-
-// style
-import styled from 'styled-components';
 
 const SearchInput = styled(Input.Search)`
   vertical-align: middle;

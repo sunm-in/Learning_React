@@ -1,4 +1,7 @@
+// library
 import React from 'react';
+
+// components
 import AppLayout from '../components/AppLayout';
 
 const Home = () => {
