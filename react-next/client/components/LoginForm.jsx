@@ -7,7 +7,18 @@ import Link from 'next/link';
 // antd
 import { Button, Form, Input } from 'antd';
 
-const LoginForm = () => {
+// style
+import styled from 'styled-components';
+
+const ButtonWrapper = styled.div`
+  margin-top: 10px;
+`;
+
+const FormWrapper = styled(Form)`
+  padding: 10px;
+`;
+
+const LoginForm = ({ setIsLoggedIn }) => {
   const [id, setId] = useState('');
   const [password, setPassword] = useState('');
 
@@ -19,8 +30,17 @@ const LoginForm = () => {
     setPassword(e.target.value);
   }, []);
 
+  const onSubmitForm = useCallback(() => {
+    console.log(id, password);
+    setIsLoggedIn(true);
+  }, [id, password]);
+
+  // {} === {}는 false, 인라인 스타일이 적용된 컴포넌트 / 일반태그가 다르다고 판단하여 돔을 새로 그리게 되어 불필요한 리렌더링이 발생
+  // 해결 -> 변수로 설정해 사용 or styled-components 사용
+  // const style = useMemo(() => ({ marginTop: 10 }), []);
+
   return (
-    <Form>
+    <FormWrapper onFinish={onSubmitForm}>
       <div>
         <label htmlFor='user-id'>아이디</label>
         <br />
@@ -31,21 +51,23 @@ const LoginForm = () => {
         <br />
         <Input
           name='user-password'
+          type='password'
           value={password}
           onChange={onChangePassword}
-          type='password'
           required
         />
       </div>
-      <div>
-        <Button>로그인</Button>
+      <ButtonWrapper>
+        <Button type='primary' htmlType='submit'>
+          로그인
+        </Button>
         <Link href='/signup'>
           <a>
             <Button>회원가입</Button>
           </a>
         </Link>
-      </div>
-    </Form>
+      </ButtonWrapper>
+    </FormWrapper>
   );
 };
 
