@@ -8,6 +8,9 @@ import Head from 'next/head';
 // antd/css
 import 'antd/dist/antd.css';
 
+// store
+import wrapper from '../redux/configureStore';
+
 const App = ({ Component }) => {
   return (
     <>
@@ -24,4 +27,4 @@ App.propTypes = {
   Component: PropTypes.elementType.isRequired,
 };
 
-export default App;
+export default wrapper.withRedux(App);
