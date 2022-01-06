@@ -1,7 +1,7 @@
 // library
 import React, { useCallback } from 'react';
+import { useDispatch } from 'react-redux';
 import styled from 'styled-components';
-import PropTypes from 'prop-types';
 
 // hooks
 import useInput from '../hooks/useInput';
@@ -12,6 +12,9 @@ import Link from 'next/link';
 // antd
 import { Button, Form, Input } from 'antd';
 
+// redux
+import { login } from '../redux/reducers/user';
+
 const ButtonWrapper = styled.div`
   margin-top: 10px;
 `;
@@ -20,13 +23,14 @@ const FormWrapper = styled(Form)`
   padding: 10px;
 `;
 
-const LoginForm = ({ setIsLoggedIn }) => {
+const LoginForm = () => {
+  const dispatch = useDispatch();
   const [id, onChangeId] = useInput('');
   const [password, onChangePassword] = useInput('');
 
   const onSubmitForm = useCallback(() => {
     console.log(id, password);
-    setIsLoggedIn(true);
+    dispatch(login(id, password));
   }, [id, password]);
 
   // {} === {}는 false, 인라인 스타일이 적용된 컴포넌트 / 일반태그가 다르다고 판단하여 돔을 새로 그리게 되어 불필요한 리렌더링이 발생
@@ -63,10 +67,6 @@ const LoginForm = ({ setIsLoggedIn }) => {
       </ButtonWrapper>
     </FormWrapper>
   );
-};
-
-LoginForm.propTypes = {
-  setIsLoggedIn: PropTypes.func.isRequired,
 };
 
 export default LoginForm;
