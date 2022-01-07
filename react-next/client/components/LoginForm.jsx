@@ -3,7 +3,7 @@ import React, { useCallback } from 'react';
 import { useDispatch } from 'react-redux';
 import styled from 'styled-components';
 
-// hooks
+// custom hook
 import useInput from '../hooks/useInput';
 
 // link
