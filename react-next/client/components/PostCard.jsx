@@ -6,6 +6,7 @@ import PropTypes from 'prop-types';
 // components
 import PostImages from './PostImages';
 import CommentForm from './CommentForm';
+import PostCardContent from './PostCardContent';
 
 // antd
 import { Card, Popover, Button, Avatar, List, Comment } from 'antd';
@@ -60,7 +61,7 @@ const PostCard = ({ post }) => {
         <Card.Meta
           avatar={<Avatar>{post.User.nickname[0]}</Avatar>}
           title={post.User.nickname}
-          description={post.content}
+          description={<PostCardContent postData={post.content} />}
         />
       </Card>
       {commentFormOpened && (
