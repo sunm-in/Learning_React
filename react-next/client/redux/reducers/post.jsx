@@ -6,7 +6,7 @@ export const initialState = {
         id: 1,
         nickname: 'nickname1',
       },
-      content: '첫 번째 게시글 #test',
+      content: '첫 번째 게시글 #test #test2 #test3',
       Images: [
         {
           src: 'https://joyvancouver.com/wp-content/uploads/2021/09/iphone13_210914.jpg',
