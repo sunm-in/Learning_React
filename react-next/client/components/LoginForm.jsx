@@ -1,6 +1,6 @@
 // library
 import React, { useCallback } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
 
 // custom hook
@@ -13,7 +13,7 @@ import Link from 'next/link';
 import { Button, Form, Input } from 'antd';
 
 // redux
-import { login } from '../redux/reducers/user';
+import { loginRequestAction } from '../redux/reducers/user';
 
 const ButtonWrapper = styled.div`
   margin-top: 10px;
@@ -25,12 +25,14 @@ const FormWrapper = styled(Form)`
 
 const LoginForm = () => {
   const dispatch = useDispatch();
+  const { isLoggingIn } = useSelector((state) => state.user);
+
   const [id, onChangeId] = useInput('');
   const [password, onChangePassword] = useInput('');
 
   const onSubmitForm = useCallback(() => {
     console.log(id, password);
-    dispatch(login(id, password));
+    dispatch(loginRequestAction(id, password));
   }, [id, password]);
 
   // {} === {}는 false, 인라인 스타일이 적용된 컴포넌트 / 일반태그가 다르다고 판단하여 돔을 새로 그리게 되어 불필요한 리렌더링이 발생
@@ -47,16 +49,10 @@ const LoginForm = () => {
       <div>
         <label htmlFor='user-password'>비밀번호</label>
         <br />
-        <Input
-          name='user-password'
-          type='password'
-          value={password}
-          onChange={onChangePassword}
-          required
-        />
+        <Input name='user-password' type='password' value={password} onChange={onChangePassword} required />
       </div>
       <ButtonWrapper>
-        <Button type='primary' htmlType='submit'>
+        <Button type='primary' htmlType='submit' loading={isLoggingIn}>
           로그인
         </Button>
         <Link href='/signup'>
