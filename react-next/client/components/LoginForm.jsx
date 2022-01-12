@@ -25,14 +25,13 @@ const FormWrapper = styled(Form)`
 
 const LoginForm = () => {
   const dispatch = useDispatch();
-  const { isLoggingIn } = useSelector((state) => state.user);
+  const { logInLoading } = useSelector((state) => state.user);
 
   const [id, onChangeId] = useInput('');
   const [password, onChangePassword] = useInput('');
 
   const onSubmitForm = useCallback(() => {
-    console.log(id, password);
-    dispatch(loginRequestAction(id, password));
+    dispatch(loginRequestAction({ id, password }));
   }, [id, password]);
 
   // {} === {}는 false, 인라인 스타일이 적용된 컴포넌트 / 일반태그가 다르다고 판단하여 돔을 새로 그리게 되어 불필요한 리렌더링이 발생
@@ -52,7 +51,7 @@ const LoginForm = () => {
         <Input name='user-password' type='password' value={password} onChange={onChangePassword} required />
       </div>
       <ButtonWrapper>
-        <Button type='primary' htmlType='submit' loading={isLoggingIn}>
+        <Button type='primary' htmlType='submit' loading={logInLoading}>
           로그인
         </Button>
         <Link href='/signup'>
