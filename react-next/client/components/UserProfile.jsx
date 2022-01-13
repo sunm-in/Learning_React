@@ -19,16 +19,16 @@ const UserProfile = () => {
   return (
     <Card
       actions={[
-        <div key='twit'>
+        <div key="twit">
           게시글 수 <br />
           {me.Posts.length}
         </div>,
-        <div key='followings'>
+        <div key="followings">
           팔로잉
           <br />
           {me.Followings.length}
         </div>,
-        <div key='follwers'>
+        <div key="follwers">
           팔로워
           <br />
           {me.Followers.length}

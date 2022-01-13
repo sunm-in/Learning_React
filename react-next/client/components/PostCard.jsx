@@ -3,16 +3,16 @@ import React, { useState, useCallback } from 'react';
 import { useSelector } from 'react-redux';
 import PropTypes from 'prop-types';
 
-// components
-import PostImages from './PostImages';
-import CommentForm from './CommentForm';
-import PostCardContent from './PostCardContent';
-
 // antd
 import { Card, Popover, Button, Avatar, List, Comment } from 'antd';
 
 // icons
 import { RetweetOutlined, HeartOutlined, HeartTwoTone, MessageOutlined, EllipsisOutlined } from '@ant-design/icons';
+
+// components
+import PostImages from './PostImages';
+import CommentForm from './CommentForm';
+import PostCardContent from './PostCardContent';
 
 const PostCard = ({ post }) => {
   const id = useSelector((state) => state.user.me?.id);
@@ -32,21 +32,21 @@ const PostCard = ({ post }) => {
       <Card
         cover={post.Images[0] && <PostImages images={post.Images} />}
         actions={[
-          <RetweetOutlined key='retweet' />,
+          <RetweetOutlined key="retweet" />,
           liked ? (
-            <HeartTwoTone twoToneColor='#eb2f96' key='heart' onClick={onToggleLike} />
+            <HeartTwoTone twoToneColor="#eb2f96" key="heart" onClick={onToggleLike} />
           ) : (
-            <HeartOutlined key='heart' onClick={onToggleLike} />
+            <HeartOutlined key="heart" onClick={onToggleLike} />
           ),
-          <MessageOutlined key='comment' onClick={onToggleComment} />,
+          <MessageOutlined key="comment" onClick={onToggleComment} />,
           <Popover
-            key='more'
+            key="more"
             content={
               <Button.Group>
                 {id && post.User.id === id ? (
                   <>
                     <Button>수정</Button>
-                    <Button type='danger'>삭제</Button>
+                    <Button type="danger">삭제</Button>
                   </>
                 ) : (
                   <Button>신고</Button>
@@ -69,7 +69,7 @@ const PostCard = ({ post }) => {
           <CommentForm post={post} />
           <List
             header={`${post.Comments.length}개의 댓글`}
-            itemLayout='horizontal'
+            itemLayout="horizontal"
             dataSource={post.Comments}
             renderItem={(item) => (
               <li>

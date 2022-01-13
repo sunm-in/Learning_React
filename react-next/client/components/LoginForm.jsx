@@ -2,15 +2,13 @@
 import React, { useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
-
-// custom hook
-import useInput from '../hooks/useInput';
-
-// link
 import Link from 'next/link';
 
 // antd
 import { Button, Form, Input } from 'antd';
+
+// custom hook
+import useInput from '../hooks/useInput';
 
 // redux
 import { loginRequestAction } from '../redux/reducers/user';
@@ -41,20 +39,20 @@ const LoginForm = () => {
   return (
     <FormWrapper onFinish={onSubmitForm}>
       <div>
-        <label htmlFor='user-email'>이메일</label>
+        <label htmlFor="user-email">이메일</label>
         <br />
-        <Input name='user-email' type='email' value={email} onChange={onChangeEmail} required />
+        <Input name="user-email" type="email" value={email} onChange={onChangeEmail} required />
       </div>
       <div>
-        <label htmlFor='user-password'>비밀번호</label>
+        <label htmlFor="user-password">비밀번호</label>
         <br />
-        <Input name='user-password' type='password' value={password} onChange={onChangePassword} required />
+        <Input name="user-password" type="password" value={password} onChange={onChangePassword} required />
       </div>
       <ButtonWrapper>
-        <Button type='primary' htmlType='submit' loading={logInLoading}>
+        <Button type="primary" htmlType="submit" loading={logInLoading}>
           로그인
         </Button>
-        <Link href='/signup'>
+        <Link href="/signup">
           <a>
             <Button>회원가입</Button>
           </a>

@@ -3,11 +3,11 @@ import React, { useCallback, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import PropTypes from 'prop-types';
 
-// custom hook
-import useInput from '../hooks/useInput';
-
 // antd
 import { Form, Input, Button } from 'antd';
+
+// custom hook
+import useInput from '../hooks/useInput';
 
 // redux
 import { ADD_COMMENT_REQUEST } from '../redux/reducers/post';
@@ -35,7 +35,7 @@ const CommentForm = ({ post }) => {
     <Form onFinish={onSubmitComment}>
       <Form.Item style={{ position: 'relative', margin: 0 }}>
         <Input.TextArea value={commentText} onChange={onChangeCommentText} rows={4} />
-        <Button style={{ position: 'absolute', right: 0, bottom: -40 }} type='primary' htmlType='submit'>
+        <Button style={{ position: 'absolute', right: 0, bottom: -40 }} type="primary" htmlType="submit">
           작성
         </Button>
       </Form.Item>

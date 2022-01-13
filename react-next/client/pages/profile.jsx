@@ -1,8 +1,6 @@
 // library
 import React from 'react';
 import { useSelector } from 'react-redux';
-
-// head
 import Head from 'next/head';
 
 // components
@@ -20,8 +18,8 @@ const Profile = () => {
       </Head>
       <AppLayout>
         <NicknameEditForm />
-        <FollowList header='팔로잉' data={me.Followings} />
-        <FollowList header='팔로워' data={me.Followers} />
+        <FollowList header="팔로잉" data={me.Followings} />
+        <FollowList header="팔로워" data={me.Followers} />
       </AppLayout>
     </>
   );

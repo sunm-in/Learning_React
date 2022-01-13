@@ -7,12 +7,12 @@ import PropTypes from 'prop-types';
 // link
 import Link from 'next/link';
 
+// antd
+import { Menu, Input, Row, Col } from 'antd';
+
 // components
 import UserProfile from './UserProfile';
 import LoginForm from './LoginForm';
-
-// antd
-import { Menu, Input, Row, Col } from 'antd';
 
 const Global = createGlobalStyle`
   .ant-row {
@@ -39,14 +39,14 @@ const AppLayout = ({ children }) => {
   return (
     <div>
       <Global />
-      <Menu mode='horizontal'>
+      <Menu mode="horizontal">
         <Menu.Item>
-          <Link href='/'>
+          <Link href="/">
             <a>메인페이지</a>
           </Link>
         </Menu.Item>
         <Menu.Item>
-          <Link href='/profile'>
+          <Link href="/profile">
             <a>프로필</a>
           </Link>
         </Menu.Item>
@@ -54,7 +54,7 @@ const AppLayout = ({ children }) => {
           <SearchInput enterButton />
         </Menu.Item>
         <Menu.Item>
-          <Link href='/signup'>
+          <Link href="/signup">
             <a>회원가입</a>
           </Link>
         </Menu.Item>
@@ -67,7 +67,7 @@ const AppLayout = ({ children }) => {
           {children}
         </Col>
         <Col xs={24} md={6}>
-          <a href='https://github.com/sunm-in' target='_blank' rel='noreferrer noopener'>
+          <a href="https://github.com/sunm-in" target="_blank" rel="noreferrer noopener">
             Made by Sunmin
           </a>
         </Col>

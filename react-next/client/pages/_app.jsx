@@ -1,8 +1,6 @@
 // library
 import React from 'react';
 import PropTypes from 'prop-types';
-
-// head
 import Head from 'next/head';
 
 // antd/css
@@ -15,7 +13,7 @@ const App = ({ Component }) => {
   return (
     <>
       <Head>
-        <meta charSet='utf-8' />
+        <meta charSet="utf-8" />
         <title>Sunmin</title>
       </Head>
       <Component />
