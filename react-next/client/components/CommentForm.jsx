@@ -1,6 +1,6 @@
 // library
-import React, { useCallback } from 'react';
-import { useSelector } from 'react-redux';
+import React, { useCallback, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import PropTypes from 'prop-types';
 
 // custom hook
@@ -9,24 +9,33 @@ import useInput from '../hooks/useInput';
 // antd
 import { Form, Input, Button } from 'antd';
 
-const CommentForm = ({ post }) => {
-  const id = useSelector((state) => state.user.me?.id);
+// redux
+import { ADD_COMMENT_REQUEST } from '../redux/reducers/post';
 
-  const [commentText, onChangeCommentText] = useInput('');
+const CommentForm = ({ post }) => {
+  const dispatch = useDispatch();
+  const id = useSelector((state) => state.user.me?.id);
+  const { addCommentDone } = useSelector((state) => state.post);
+  const [commentText, onChangeCommentText, setCommentText] = useInput('');
+
+  useEffect(() => {
+    if (addCommentDone) {
+      setCommentText('');
+    }
+  }, [addCommentDone]);
 
   const onSubmitComment = useCallback(() => {
-    console.log(post.id, commentText);
-  }, [commentText]);
+    dispatch({
+      type: ADD_COMMENT_REQUEST,
+      data: { content: commentText, postId: post.id, userId: id },
+    });
+  }, [commentText, id]);
 
   return (
     <Form onFinish={onSubmitComment}>
       <Form.Item style={{ position: 'relative', margin: 0 }}>
         <Input.TextArea value={commentText} onChange={onChangeCommentText} rows={4} />
-        <Button
-          style={{ position: 'absolute', right: 0, bottom: -40 }}
-          type='primary'
-          htmlType='submit'
-        >
+        <Button style={{ position: 'absolute', right: 0, bottom: -40 }} type='primary' htmlType='submit'>
           작성
         </Button>
       </Form.Item>
