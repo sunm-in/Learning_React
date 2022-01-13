@@ -20,7 +20,6 @@ function logInAPI(data) {
 
 function* logIn(action) {
   try {
-    console.log('saga login');
     // const result = yield call(logInAPI, action.data);
     yield delay(1000);
     yield put({

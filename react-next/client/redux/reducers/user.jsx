@@ -65,7 +65,6 @@ const reducer = (state = initialState, action) => {
         logInError: null,
       };
     case LOG_IN_SUCCESS:
-      console.log('reducer login');
       return {
         ...state,
         logInLoading: false,
