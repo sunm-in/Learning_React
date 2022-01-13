@@ -27,12 +27,12 @@ const LoginForm = () => {
   const dispatch = useDispatch();
   const { logInLoading } = useSelector((state) => state.user);
 
-  const [id, onChangeId] = useInput('');
+  const [email, onChangeEmail] = useInput('');
   const [password, onChangePassword] = useInput('');
 
   const onSubmitForm = useCallback(() => {
-    dispatch(loginRequestAction({ id, password }));
-  }, [id, password]);
+    dispatch(loginRequestAction({ email, password }));
+  }, [email, password]);
 
   // {} === {}는 false, 인라인 스타일이 적용된 컴포넌트 / 일반태그가 다르다고 판단하여 돔을 새로 그리게 되어 불필요한 리렌더링이 발생
   // 해결 -> 변수로 설정해 사용 or styled-components 사용
@@ -41,9 +41,9 @@ const LoginForm = () => {
   return (
     <FormWrapper onFinish={onSubmitForm}>
       <div>
-        <label htmlFor='user-id'>아이디</label>
+        <label htmlFor='user-email'>이메일</label>
         <br />
-        <Input name='user-id' value={id} onChange={onChangeId} required />
+        <Input name='user-email' type='email' value={email} onChange={onChangeEmail} required />
       </div>
       <div>
         <label htmlFor='user-password'>비밀번호</label>
