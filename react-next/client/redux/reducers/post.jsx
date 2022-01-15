@@ -1,4 +1,4 @@
-import shortid from 'shortid';
+import shortId from 'shortid';
 
 export const initialState = {
   mainPosts: [
@@ -11,24 +11,31 @@ export const initialState = {
       content: '첫 번째 게시글 #test #test2 #test3',
       Images: [
         {
+          id: shortId.generate(),
           src: 'https://joyvancouver.com/wp-content/uploads/2021/09/iphone13_210914.jpg',
         },
         {
+          id: shortId.generate(),
           src: 'https://betanews.net/imagedb/thumb/2021/1001/33740d8e.jpg',
         },
         {
+          id: shortId.generate(),
           src: 'https://s3.orbi.kr/data/file/united2/edb6f799d25e48d5b845037231de8163.jpg',
         },
       ],
       Comments: [
         {
+          id: shortId.generate(),
           User: {
+            id: shortId.generate(),
             nickname: 'nick1',
           },
           content: 'comment content 1',
         },
         {
+          id: shortId.generate(),
           User: {
+            id: shortId.generate(),
             nickname: 'nick2',
           },
           content: 'comment content2',
@@ -40,6 +47,9 @@ export const initialState = {
   addPostLoading: false,
   addPostDone: false,
   addPostError: null,
+  removePostLoading: false,
+  removePostDone: false,
+  removePostError: null,
   addCommentLoading: false,
   addCommentDone: false,
   addCommentError: null,
@@ -48,6 +58,10 @@ export const initialState = {
 export const ADD_POST_REQUEST = 'ADD_POST_REQUEST';
 export const ADD_POST_SUCCESS = 'ADD_POST_SUCCESS';
 export const ADD_POST_FAILURE = 'ADD_POST_FAILURE';
+
+export const REMOVE_POST_REQUEST = 'REMOVE_POST_REQUEST';
+export const REMOVE_POST_SUCCESS = 'REMOVE_POST_SUCCESS';
+export const REMOVE_POST_FAILURE = 'REMOVE_POST_FAILURE';
 
 export const ADD_COMMENT_REQUEST = 'ADD_COMMENT_REQUEST';
 export const ADD_COMMENT_SUCCESS = 'ADD_COMMENT_SUCCESS';
@@ -64,8 +78,8 @@ export const addComment = (data) => ({
 });
 
 const dummyPost = (data) => ({
-  id: shortid.generate(),
-  content: data,
+  id: data.id,
+  content: data.content,
   User: {
     id: 1,
     nickname: 'nickname1',
@@ -75,7 +89,7 @@ const dummyPost = (data) => ({
 });
 
 const dummyComment = (data) => ({
-  id: shortid.generate(),
+  id: shortId.generate(),
   content: data,
   User: {
     id: 1,
@@ -104,6 +118,26 @@ const reducer = (state = initialState, action) => {
         ...state,
         addPostLoading: false,
         addPostError: action.error,
+      };
+    case REMOVE_POST_REQUEST:
+      return {
+        ...state,
+        removePostLoading: true,
+        removePostDone: false,
+        removePostError: null,
+      };
+    case REMOVE_POST_SUCCESS:
+      return {
+        ...state,
+        mainPosts: state.mainPosts.filter((v) => v.id !== action.data),
+        removePostLoading: false,
+        removePostDone: true,
+      };
+    case REMOVE_POST_FAILURE:
+      return {
+        ...state,
+        removePostLoading: false,
+        removePostError: action.error,
       };
     case ADD_COMMENT_REQUEST:
       return {
