@@ -88,7 +88,7 @@ const PostCard = ({ post }) => {
         <div>
           <CommentForm post={post} />
           <List
-            header={`${post.Comments.length}개의 댓글`}
+            header={`${post.Comments ? post.Comments.length : 0}개의 댓글`}
             itemLayout="horizontal"
             dataSource={post.Comments}
             renderItem={(item) => (
@@ -108,7 +108,6 @@ const PostCard = ({ post }) => {
 };
 
 PostCard.propTypes = {
-  // post: PropTypes.object.isRequired,
   post: PropTypes.shape({
     id: PropTypes.number,
     User: PropTypes.object,
