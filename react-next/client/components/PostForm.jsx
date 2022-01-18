@@ -1,20 +1,22 @@
 // library
-import React, { useCallback, useEffect, useRef } from 'react';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
 // antd
 import { Form, Input, Button } from 'antd';
 
-// custom hook
-import useInput from '../hooks/useInput';
-
 // redux
-import { addPost } from '../redux/reducers/post';
+import { ADD_POST_REQUEST } from '../redux/reducers/post';
 
 const PostForm = () => {
   const dispatch = useDispatch();
-  const { imagePaths, addPostDone } = useSelector((state) => state.post);
-  const [text, onChangeText, setText] = useInput('');
+  const { imagePaths, addPostLoading, addPostDone } = useSelector((state) => state.post);
+  const [text, setText] = useState('');
+
+  const imageInput = useRef();
+  const onClickImageUpload = useCallback(() => {
+    imageInput.current.click();
+  }, [imageInput.current]);
 
   useEffect(() => {
     if (addPostDone) {
@@ -22,22 +24,34 @@ const PostForm = () => {
     }
   }, [addPostDone]);
 
-  const onSubmit = useCallback(() => {
-    dispatch(addPost(text));
+  const onSubmitForm = useCallback(() => {
+    dispatch({
+      type: ADD_POST_REQUEST,
+      data: text,
+    });
   }, [text]);
 
-  const imageInput = useRef();
-  const onClickImageUpload = useCallback(() => {
-    imageInput.current.click();
-  }, [imageInput.current]);
+  const onChangeText = useCallback((e) => {
+    setText(e.target.value);
+  }, []);
 
   return (
-    <Form style={{ margin: '10px 0 20px' }} encType="multipart/form-data" onFinish={onSubmit}>
-      <Input.TextArea value={text} onChange={onChangeText} maxLength={140} placeholder="내용을 입력해 주세요." />
+    <Form style={{ margin: '10px 0 20px' }} encType="multipart/form-data" onFinish={onSubmitForm}>
+      <Input.TextArea
+        value={text}
+        onChange={onChangeText}
+        maxLength={140}
+        placeholder="내용을 입력해 주세요."
+      />
       <div>
         <input type="file" multiple hidden ref={imageInput} />
         <Button onClick={onClickImageUpload}>이미지 업로드</Button>
-        <Button type="primary" style={{ float: 'right' }} htmlType="submit">
+        <Button
+          type="primary"
+          style={{ float: 'right' }}
+          htmlType="submit"
+          loading={addPostLoading}
+        >
           테스트
         </Button>
       </div>
