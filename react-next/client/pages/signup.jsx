@@ -1,8 +1,9 @@
 // library
-import React, { useCallback, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
 import Head from 'next/head';
+import Router from 'next/router';
 
 // antd
 import { Form, Input, Checkbox, Button } from 'antd';
@@ -22,7 +23,20 @@ const ErrorMessage = styled.div`
 
 const SignUp = () => {
   const dispatch = useDispatch();
-  const { signUpLoading } = useSelector((state) => state.user);
+  const { signUpLoading, signUpDone, signUpError } = useSelector((state) => state.user);
+
+  useEffect(() => {
+    if (signUpDone) {
+      Router.push('/');
+    }
+  }, [signUpDone]);
+
+  useEffect(() => {
+    if (signUpError) {
+      alert(signUpError);
+    }
+  }, [signUpError]);
+
   const [email, onChangeEmail] = useInput('');
   const [nickname, onChangeNickname] = useInput('');
   const [password, onChangePassword] = useInput('');
@@ -76,7 +90,13 @@ const SignUp = () => {
         <div>
           <label htmlFor="user-password">비밀번호</label>
           <br />
-          <Input name="user-password" type="password" value={password} required onChange={onChangePassword} />
+          <Input
+            name="user-password"
+            type="password"
+            value={password}
+            required
+            onChange={onChangePassword}
+          />
         </div>
         <div>
           <label htmlFor="user-password-check">비밀번호 체크</label>
